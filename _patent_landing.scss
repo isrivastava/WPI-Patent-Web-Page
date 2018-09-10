@@ -1,0 +1,87 @@
+.view-patents {
+  &.view-id-patents {
+    #edit-combine-wrapper {
+      @include grid-column(12);
+
+      @include breakpoint(large) {
+        @include grid-column(4.5);
+        padding-left: 0;
+      }
+    }
+    
+    #edit-field-research-category-tid-wrapper {
+      @include grid-column(12);
+      @include breakpoint(medium) {
+        @include grid-column(7);
+      }
+
+      @include breakpoint(large) {
+        @include grid-column(4.5);
+        padding-left: 0;
+      }
+
+      .form-item-field-research-category-tid {
+        position: relative;
+      }
+
+      #edit-research-category {
+        @extend select;
+        text-align: left;
+        width: 100%;
+        margin-bottom: 0;
+      }
+
+      #edit-field-research-category-tid {
+        display: none;
+        position: absolute;
+        width: 100%;
+        z-index: 2;
+      }
+    }
+
+    .view-content{
+      padding-left: $column-gutter / 2;
+      padding-right: $column-gutter / 2;
+
+      @include breakpoint(large) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .views-submit-button {
+      @include grid-column(6);
+
+      @include breakpoint(medium) {
+        @include grid-column(2.5);
+        padding-left: 0;
+      } 
+
+      @include breakpoint(large) {
+        @include grid-column(1.5);
+        padding-left: 0;
+      }     
+    }
+
+    .views-reset-button {
+      @include grid-column(6);
+      padding-left: 0;
+
+      @include breakpoint(medium) {
+        @include grid-column(2.5);
+        padding-left: 0;
+      }
+
+      @include breakpoint(large) {
+        @include grid-column(1.5);
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    button,
+    input[type="submit"] {
+      width: 100%;
+    }
+  }
+}

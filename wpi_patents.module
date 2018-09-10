@@ -1,0 +1,55 @@
+<?php
+/**
+ * @file
+ * Code for the WPI Patents feature.
+ */
+
+include_once 'wpi_patents.features.inc';
+
+function wpi_patents_form_views_exposed_form_alter(&$form, &$form_state) {
+  // Add placeholder text.
+  if ($form['#id'] == 'views-exposed-form-patents-page') {
+    $form['combine']['#attributes']['placeholder'][] = 'Search by title, keyword or inventor';
+  }
+}
+
+/**
+ * Implements hook_preprocess_panels_pane().
+ */
+function wpi_patents_preprocess_panels_pane(&$vars) {
+  if (isset($vars['content']['#field_name']) && $vars['content']['#field_name'] == 'field_faculty_phd_inventors') {
+    foreach ($vars['content']['#items'] as $key => $value) {
+      $pid = profile2_load_by_user($value['entity']->uid);
+      if (isset($pid['faculty_profile'])) {
+        $full_name = $pid['faculty_profile']->field_full_name['und'][0]['value'];
+        $vars['content'][$key]['#label'] = $full_name;
+      }
+    }
+  }
+}
+
+function wpi_patents_preprocess_views_view_table(&$vars) {  
+  if ($vars['view']->name == 'patents') {
+    foreach ($vars['rows'] as $key => $node) {
+      if (isset($node['field_student_inventors']) && !empty($node['field_student_inventors'])) {
+        $vars['rows'][$key]['field_full_name'] = $node['field_full_name'] . ', ' .  $node['field_student_inventors'];
+      }
+      unset($vars['rows'][$key]['field_student_inventors']);
+    }
+    unset($vars['header']['field_student_inventors']);
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ * 
+ * Remove duplicate comma when there is a doctoral student profile as an inventor. BB 08-17-18
+ */
+function wpi_patents_views_pre_render(&$view) {
+  //dpm($view);
+	if ($view->name == 'patents' && $view->current_display == 'page') {
+		foreach ($view->style_plugin->rendered_fields as $key => $value) {
+			$view->style_plugin->rendered_fields[$key]['field_full_name'] = str_replace(', ,', ', ', ($value['field_full_name']));
+		}	
+	}
+}

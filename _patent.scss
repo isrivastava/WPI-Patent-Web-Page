@@ -1,0 +1,89 @@
+.node-patent {
+  .patent-right-division {
+    > div {
+      background-color: $gallery;
+      padding-left: $column-gutter / 2;
+      padding-right: $column-gutter / 2;
+      padding-top: $column-gutter / 4;
+      @include breakpoint(small only) {
+        margin-left: $column-gutter / 2;
+      }
+
+      &:first-child {
+        padding-top: $column-gutter / 2;
+      }
+
+      &:last-child {
+        padding-bottom: $column-gutter / 2;
+      }
+
+    }
+
+    .foundation-pane {
+      margin-bottom: 0;
+    }
+
+    ul,
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .patent-other-inventors{
+    &:nth-child(3) {
+      padding-top: 0;
+    }
+  } 
+
+  .patent-case-number,
+  .patent-status,
+  .patent-application-number {
+    .field-label,
+    .field-items {
+      display: inline-block;
+    }
+  }
+
+  .patent-feature-benefits,
+  .patent-image {
+    padding-bottom: $column-gutter / 2;
+  }
+
+  .patent-feature-benefits {
+    ul {
+      margin-left: 1rem;
+    }
+
+    .field-label {
+      @extend h2;
+    }
+  }
+
+  .patent-research-category {
+    ul {
+      list-style-type: none;
+      margin-left: 0;
+    }
+
+    li {
+      margin-bottom: 0;
+    }
+  }
+
+  .patent-contact {
+    .pane-title {
+      text-transform: uppercase;
+      font-size: 13px;
+      font-family: $font-myriad;
+      color: $mine-shaft;
+      @include breakpoint(medium) {
+        font-size: 14px;
+      }
+      @include breakpoint(large) {
+        font-size: 16px;
+      }
+    }
+  }
+}
